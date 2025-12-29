@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import "tailwindcss";
+
+
+
+*{
+  font-family: "Outfit", sans-serif;
+}
+
+@layer base{
+  button{
+    @apply cursor-pointer;
+  }
+  
+}
+
+
+
+
+
+
+
+/* 
+@media print {
+  @page {
+    size: A4;
+    margin: 6mm; 
+  }
+
+  #resume-print-area {
+    zoom: 1; 
+    position: relative;
+    width: 100%;
+    padding: 6mm; 
+    box-sizing: border-box;
+    overflow: hidden;
+    font-size: 10.5pt; 
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body * {
+    visibility: hidden; 
+  }
+
+  #resume-print-area,
+  #resume-print-area * {
+    visibility: visible;
+  }
+
+  html {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  * {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+
+  .resume-section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    page-break-after: auto;
+    display: block;
+    margin-bottom: 4px;
+  }
+} */
+
+
+
+
+
+/* ===== RESUME PRINT FIX ===== */
+@media print {
+
+  /* PAGE SETUP */
+  @page {
+    size: A4;
+    margin: 10mm; /* control top extra space */
+  }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    width: auto;
+    height: auto;
+    background: white;
+    overflow: visible; /* 🔴 important: allow next page */
+  }
+
+  /* ❌ Hide everything */
+  body * {
+    visibility: hidden !important;
+  }
+
+  /* ✅ Show only resume */
+  #resume-print-area,
+  #resume-print-area * {
+    visibility: visible !important;
+  }
+
+  /* ✅ Resume container */
+  #resume-print-area {
+    position: relative; /* 🔴 absolute hata diya */
+    margin: 0 auto;
+    width: 210mm;
+    min-height: 297mm;
+    padding: 12mm;
+    box-sizing: border-box;
+    overflow: visible; /* 🔴 content cut nahi hoga */
+    background: white;
+  }
+
+  /* ✅ Section safe breaks */
+  section,
+  .resume-section {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    page-break-after: auto;
+  }
+
+  /* Text spacing fix */
+  p,
+  li {
+    line-height: 1.45;
+  }
+
+  /* Remove shadows */
+  * {
+    box-shadow: none !important;
+  }
+
+  /* Exact colors */
+  html {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
